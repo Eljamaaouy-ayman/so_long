@@ -1,7 +1,7 @@
 NAME = so_long
 BNS_NAME = bonus
 
-SRC = check.c count.c getNexLine/get_next_line.c getNexLine/get_next_line_utils.c
+SRC = check.c count.c getNexLine/get_next_line.c getNexLine/get_next_line_utils.c flood_fill.c
 
 BNS = 
 

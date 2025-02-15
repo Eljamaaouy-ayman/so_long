@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:00:34 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/09 12:56:30 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:22:23 by eljamaaouya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,24 @@
 int	check_outlines(t_game *game)
 {
 	int (i), (j), (len);
-	i = 0;
 	j = 0;
+	i = 0;
 	len = ft_strlen(game->map[j]) - 1;
 	while (game->map[j] != NULL)
 	{
-		if (game->map[j][0] != 1 || game->map[j][len] != 1)
+		if (game->map[j][0] != '1' || game->map[j][len - 1] != '1')
 			return (-1);
+		j++;
 	}
 	while (game->map[0][i] != '\n')
 	{
-		if (game->map[0][i] != 1 || game->map[j][i] != 1)
+		if (game->map[0][i] != '1' || game->map[j - 1][i] != '1')
 			return (-1);
+		i++;
 	}
 	return (0);
 }
 
-int	check_length(t_game *game)
-{
-	size_t (j), (len);
-	j = 0;
-	len = ft_strlen(game->map[j++]);
-	while (game->map[j] != NULL)
-	{
-		if (ft_strlen(game->map[j++]) != len)
-			return (-1);
-	}
-	return (0);
-}
 int count_rows(t_game *game, char *av)
 {
 	char	*line;
@@ -63,7 +53,7 @@ int count_rows(t_game *game, char *av)
 			return (-1);
 		game->rows++;
 		line = get_next_line(fd);
-		free(line);
+		// free(line);
 	}
 	free(line);
 	close(fd);
@@ -72,26 +62,28 @@ int count_rows(t_game *game, char *av)
 
 int ft_check(t_game *game)
 {
-	if (check_length(game->map) == -1)
-		return (write(2, "unvalid map, \n", 12), 0);
-	if (check_outlines(game->map) == -1)
+	if (check_outlines(game) == -1)
 		return (write(2, "unvalid map, unvalid outlines\n", 30), 0);
-	if (count_coins(game->map) < 1)
+	if (other_char(game) == -1)
+		return (write(2, "unvalid map, unvalid character\n", 31), 0);
+	if (count_coins(game) < 1)
 		return (write(2, "unvalid map, less than a coin\n", 30), 0);
-	if (count_exit(game->map) > 1)
-		return (write(2, "unvalid map, more than one exit\n", 32), 0);
-	if (count_players(game->map) > 1)
-		return (write(2, "unvalid map, more than one player\n", 34), 0);
+	if (count_exit(game) != 1)
+		return (write(2, "unvalid map, must be one exit\n", 30), 0);
+	if (count_players(game) != 1)
+		return (write(2, "unvalid map, must be one player\n", 32), 0);
+	if (flood_fill(game) == 0)
+		return (write(2, "unvalid map, not accessible to everything\n", 42), 0);
 	return (1);
 }
+
 int	check_map(t_game *game, char *av)
 {
 	char	*line;
 
 	*game = (t_game){0};
-	int (fd), (x), (y);
+	int (fd), (y);
 	y = 0;
-	x = 0;
 	if (count_rows(game, av) == -1)
 		return (write(1, "unvalid map, misalligned map!\n", 30), 0);
 	game->map = malloc(sizeof(char *) * (game->rows));
@@ -104,8 +96,8 @@ int	check_map(t_game *game, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		line = get_next_line(fd);
 		game->map[y++] = line;
+		line = get_next_line(fd);
 	}
 	game->map[y] = NULL;
 	ft_check(game);
@@ -114,6 +106,7 @@ int	check_map(t_game *game, char *av)
 
 int main(int ac, char **av)
 {
+	(void)ac;
 	t_game game;
 	check_map(&game, av[1]);
 }
