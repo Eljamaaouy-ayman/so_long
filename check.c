@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:00:34 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/14 15:22:23 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/02/15 16:53:12 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int count_rows(t_game *game, char *av)
 			return (-1);
 		game->rows++;
 		line = get_next_line(fd);
-		// free(line);
 	}
 	free(line);
 	close(fd);
@@ -109,4 +108,5 @@ int main(int ac, char **av)
 	(void)ac;
 	t_game game;
 	check_map(&game, av[1]);
+	window(&game);
 }

@@ -3,23 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:58:18 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/02/14 15:30:31 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/02/15 16:52:46 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_arr(char **arr, int rows)
+// void free_arr(char **arr, int rows)
+// {
+// 	while(rows > 0)
+// 	{
+// 		rows--;
+// 		free(arr[rows]);
+// 	}
+// 	free(arr);
+// }
+
+void	free_arr(char **p, int rows)
 {
-	while(rows > 0)
-	{
-		rows--;
-		free(arr[rows]);
-	}
-	free(arr);
+	int i;
+
+	i = 0;
+	while (i < rows)
+		free(p[i++]);
+	free(p);
 }
 
 int check(char **map)
@@ -41,23 +51,25 @@ int check(char **map)
 	return 1;
 }
 
-void to_fill(t_game *game,char **map, int x, int y)
+void to_fill(t_game *game,char **map, int y, int x)
 {
-	if (x < 0 || y < 0 || x >= game->rows || y >= game->colomns ||
-		game->map[x][y] == '1')
+	if (y >= game->rows || x >= game->colomns || y < 0 || x < 0)
 		return ;
-	if (game->map[x][y] == 'C')
+	if (map[y][x] != 'C' && map[y][x] != 'P' && map[y][x] != '0'
+		&& map[y][x] != 'E')
+		return ;
+	if (map[y][x] == 'C')
 		game->collectible++;
-	if (game->map[x][y] == 'E' && (game->collectible != game->total_coin))
+	if ((game->map[y][x] == 'E') && (game->collectible != game->total_coin))
 	{
-		game->map[x][y] = 'V';
+		map[y][x] = 'V';
 		return ;
 	}
-	game->map[x][y] = 'V';
-	to_fill(game, map, x + 1, y);
-	to_fill(game, map, x - 1, y);
-	to_fill(game, map, x, y + 1);
-	to_fill(game, map, x, y - 1);
+	map[y][x] = 'V';
+	to_fill(game, map, y + 1, x);
+	to_fill(game, map, y - 1, x);
+	to_fill(game, map, y, x + 1);
+	to_fill(game, map, y, x - 1);
 }
 
 int flood_fill(t_game *game)
@@ -65,12 +77,12 @@ int flood_fill(t_game *game)
 	char **map;
 
 	int (i), (j);
-	map = malloc(sizeof(char *) * game->rows);
+	map = malloc(sizeof(char *) * game->rows + 1);
 	i = -1;
 	while(++i < game->rows)
 	{
 		j = -1;
-		map[i] = malloc(sizeof(char) * game->colomns);
+		map[i] = malloc(sizeof(char) * (game->colomns + 1));
 		while(++j < game->colomns)
 		{
 			map[i][j] = game->map[i][j];
@@ -87,6 +99,7 @@ int flood_fill(t_game *game)
 	if (check(map) == 0)
 		return (free_arr(map, game->rows), 0);
 	return (free_arr(map, game->rows), 1);
+	return 1;
 }
 
 int check_name(char *name)
