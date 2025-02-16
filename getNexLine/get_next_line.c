@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 14:38:36 by ael-jama          #+#    #+#             */
-/*   Updated: 2024/11/16 10:46:52 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:40:34 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*ft_read(int fd, char *stock)
 		}
 		buffer[bytesread] = 0;
 		stock = join_and_free(stock, buffer);
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr1(buffer, '\n'))
 			break ;
 	}
 	free(buffer);

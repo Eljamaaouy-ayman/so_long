@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:58:18 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/02/15 16:52:46 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/16 12:26:28 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int flood_fill(t_game *game)
 	if (check(map) == 0)
 		return (free_arr(map, game->rows), 0);
 	return (free_arr(map, game->rows), 1);
-	return 1;
 }
 
 int check_name(char *name)

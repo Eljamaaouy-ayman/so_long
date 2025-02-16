@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 20:40:42 by ael-jama          #+#    #+#             */
-/*   Updated: 2024/11/16 11:39:08 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:40:18 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (tab);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr1(const char *s, int c)
 {
 	char	*str;
 

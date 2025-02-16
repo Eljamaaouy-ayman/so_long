@@ -1,7 +1,7 @@
 NAME = so_long
 BNS_NAME = bonus
 
-SRC = check.c count.c getNexLine/get_next_line.c getNexLine/get_next_line_utils.c flood_fill.c window.c
+SRC = check.c count.c getNexLine/get_next_line.c getNexLine/get_next_line_utils.c flood_fill.c window.c additional.c
 
 BNS = 
 
@@ -16,7 +16,7 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(libmlx) -lXext -lX11 -lm
+	$(CC) $(OBJ) -o $(NAME) $(libmlx) -lXext -lX11 -lm ft_printf/libftprintf.a
 
 $(BNS_NAME): $(BNS_OBJ)
 	$(CC) $(BNS_OBJ) -o $(BNS_NAME)
