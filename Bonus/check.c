@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:00:34 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 10:41:58 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:38:08 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ int	check_map(t_game *game, char *av)
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		return (write(2, "Error opening file", 18), free(game->map), 1);
+	{
+		write(2, "Error opening file", 18);
+		return (1);
+	}
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -114,7 +117,21 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2 || check_name(av[1]) == 0)
-		return (ft_printf("Error"), 1);
+		return (ft_printf("Error\n"), 1);
 	check_map(&game, av[1]);
-	window(&game);
+	game.mlx = mlx_init();
+	game.xycoin = malloc(sizeof(int) * (game.total_coin * 2));
+	if (!game.mlx)
+		return (clean(&game), 0);
+	game.win = mlx_new_window(game.mlx, game.colomns * 64, game.rows * 64,
+			"so_long");
+	if (!game.win)
+		return (clean(&game), 0);
+	if (!img_to_ptr(&game))
+		return (0);
+	make_map(&game);
+	mlx_loop_hook(game.mlx, animation, &game);
+	mlx_key_hook(game.win, &pressed, &game);
+	mlx_hook(game.win, 17, 0, &close_win, &game);
+	mlx_loop(game.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:28:57 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 10:42:23 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:38:33 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	other_char(t_game *game)
 		{
 			if (game->map[j][i] != 'E' && game->map[j][i] != 'P'
 				&& game->map[j][i] != 'C' && game->map[j][i] != '1'
-				&& game->map[j][i] != '0')
+				&& game->map[j][i] != '0' && game->map[j][i] != 'N')
 				return (-1);
 			i++;
 		}

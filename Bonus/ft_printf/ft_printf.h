@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 22:01:09 by khhihi            #+#    #+#             */
-/*   Updated: 2025/02/22 23:26:39 by ael-jama         ###   ########.fr       */
+/*   Created: 2024/11/30 17:36:28 by ael-jama          #+#    #+#             */
+/*   Updated: 2024/12/01 10:35:41 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <limits.h>
-# include <stdint.h>
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-int		ft_strchr2(char *s, char c);
-size_t	ft_strlen(char *s);
-void	*ft_malloc(size_t count, size_t size);
-char	*ft_strjoin(char *s1, char *s2);
+int		ft_printf(const char *s, ...);
+int		ft_putstr(char *s);
+int		ft_putchar(char c);
+char	*ft_strchr(const char *s, int c);
+int		ft_putexa(unsigned int nbr);
+int		ft_putexamaj(unsigned int nbr);
+int		ft_putnbrunsigned(unsigned int n);
+int		ft_putnbr(int n);
 
 #endif

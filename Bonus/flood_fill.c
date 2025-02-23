@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:58:18 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/02/23 10:42:55 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:40:51 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	to_fill(t_game *game, char **map, int y, int x)
 	if (y >= game->rows || x >= game->colomns || y < 0 || x < 0)
 		return ;
 	if (map[y][x] != 'C' && map[y][x] != 'P' && map[y][x] != '0'
-		&& map[y][x] != 'E')
+		&& map[y][x] != 'E' && map[y][x] != 'N')
 		return ;
 	if (map[y][x] == 'C')
 		game->collectible++;
