@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:23:02 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 13:26:09 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:04:35 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_map(t_game *game, int i, int j)
 		game->xycoin[b + 1] = i * 64;
 		b += 2;
 	}
-	if (b > 12)
+	if (b >= (game->total_coin * 2))
 		b = 0;
 }
 
@@ -109,7 +109,7 @@ int	move(t_game *game, int x, int y)
 	else if (game->map[x][y] == 'E')
 	{
 		if (game->collectible == 0)
-			return (ft_printf("you win\n"), clean(game), 1);
+			return (ft_printf("you win\n"), clean(game), exit(0), 1);
 		else
 			return (0);
 	}
