@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:23:27 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 12:06:26 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:25:17 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ void	clean_animation(t_game *game)
 	i = 0;
 	while (i < 12)
 	{
-		mlx_destroy_image(game->mlx, game->anim_coin[i++]);
+		if (game->anim_coin[i])
+			mlx_destroy_image(game->mlx, game->anim_coin[i]);
+		i++;
 	}
 	free(game->anim_coin);
 	i = 0;
-	while (game->anim_player[i])
+	while (i < 6)
 	{
-		mlx_destroy_image(game->mlx, game->anim_player[i++]);
+		if (game->anim_player[i])
+			mlx_destroy_image(game->mlx, game->anim_player[i]);
+		i++;
 	}
 	free(game->anim_player);
 }
 
 void	clean(t_game *game)
 {
-	
 	if (game->floor)
 		mlx_destroy_image(game->mlx, game->floor);
 	if (game->wall)
@@ -70,4 +73,9 @@ int	close_win(t_game *game)
 	clean(game);
 	exit(0);
 	return (0);
+}
+
+void	put_img(t_game *game, void *some, int i, int j)
+{
+	mlx_put_image_to_window(game->mlx, game->win, some, j * 64, i * 64);
 }

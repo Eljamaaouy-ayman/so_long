@@ -2,6 +2,8 @@
     "files.associations": {
         "*.tcc": "c",
         "so_long.h": "c",
-        "mlx.h": "c"
+        "mlx.h": "c",
+        "map": "c",
+        "format": "c"
     }
 }

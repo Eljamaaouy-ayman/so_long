@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:58:18 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/02/23 10:40:51 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:31:14 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	free_arr(char **p, int rows)
 	free(p);
 }
 
-int	check(char **map)
+int	check(char **map, t_game *game)
 {
 	int (i), (j);
 	i = 0;
-	while (map[i] != NULL)
+	while (i < game->rows)
 	{
 		j = 0;
-		while (map[i][j] != '\0' && map[i][j] != '\n')
+		while (j < game->colomns)
 		{
 			if (map[i][j] == 'E' || map[i][j] == 'P' || map[i][j] == 'C')
 				return (0);
@@ -66,7 +66,7 @@ int	flood_fill(t_game *game)
 	char	**map;
 
 	int (i), (j);
-	map = malloc(sizeof(char *) * game->rows + 1);
+	map = malloc(sizeof(char *) * (game->rows + 1));
 	i = -1;
 	while (++i < game->rows)
 	{
@@ -85,7 +85,7 @@ int	flood_fill(t_game *game)
 	}
 	map[i] = NULL;
 	to_fill(game, map, game->x, game->y);
-	if (check(map) == 0)
+	if (check(map, game) == 0)
 		return (free_arr(map, game->rows), 0);
 	return (free_arr(map, game->rows), 1);
 }
@@ -94,9 +94,16 @@ int	check_name(char *name)
 {
 	int	len;
 
+	len = ft_strlen2(name) - 1;
+	while (len >= 0)
+	{
+		if (name[len] == '/' && name[len + 1] == '.')
+			return (0);
+		len--;
+	}
 	len = ft_strlen2(name);
 	if (len > 4 && name[len - 1] == 'r' && name[len - 2] == 'e'
-		&& name[len - 3] == 'b' && name[len - 4] == '.')
+		&& name[len - 3] == 'b' && name[len - 4] == '.' && name[0] != '.')
 		return (1);
 	return (0);
 }

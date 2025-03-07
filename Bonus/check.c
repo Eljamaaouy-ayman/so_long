@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:00:34 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 10:38:08 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:49:06 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2 || check_name(av[1]) == 0)
-		return (ft_printf("Error\n"), 1);
+		return (ft_printf("Error"), 1);
 	check_map(&game, av[1]);
 	game.mlx = mlx_init();
 	game.xycoin = malloc(sizeof(int) * (game.total_coin * 2));

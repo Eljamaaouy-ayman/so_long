@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:22:08 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 13:24:28 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:19:33 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_itoa(int n)
 
 void	move_player(t_game *game, int x_move, int y_move)
 {
-	int(x), (y);
+	int (x), (y);
 	x = game->x + x_move;
 	y = game->y + y_move;
 	if (move(game, x, y) == 0)
@@ -71,16 +71,9 @@ void	move_player(t_game *game, int x_move, int y_move)
 	game->map[x][y] = 'P';
 	make_map(game);
 }
-int	pressed(int key_code, t_game *game)
-{
-	char		*str;
-	static int	i;
-	char		*str1;
 
-	int x, y;
-	x = game->x;
-	y = game->y;
-	(void)game;
+void	keys(t_game *game, int key_code)
+{
 	if (key_code == XK_Escape)
 	{
 		clean(game);
@@ -94,6 +87,18 @@ int	pressed(int key_code, t_game *game)
 		move_player(game, 0, -1);
 	else if (key_code == XK_d || key_code == XK_Right)
 		move_player(game, 0, 1);
+}
+
+int	pressed(int key_code, t_game *game)
+{
+	char		*str;
+	static int	i;
+	char		*str1;
+
+	int (x), (y);
+	x = game->x;
+	y = game->y;
+	keys(game, key_code);
 	if (x != game->x || y != game->y)
 		i++;
 	str1 = ft_itoa(i);

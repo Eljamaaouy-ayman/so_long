@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:04:40 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/03/05 23:05:46 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:20:16 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ void	loading_coin_animation(int w, int h, t_game *game)
 
 int	img_to_ptr(t_game *game)
 {
-	int (w), (h);
+	int (w), (h), (i);
 	w = 64;
 	h = 64;
+	i = 0;
 	game->enemy = mlx_xpm_file_to_image(game->mlx, "textures/enemy.xpm", &w,
 			&h);
 	game->floor = mlx_xpm_file_to_image(game->mlx, "textures/floor.xpm", &w,
@@ -72,9 +73,17 @@ int	img_to_ptr(t_game *game)
 	game->exit = mlx_xpm_file_to_image(game->mlx, "textures/exit1.xpm", &w, &h);
 	loading_player_animation(w, h, game);
 	loading_coin_animation(w, h, game);
+	while (i < 12)
+	{
+		if (i < 6 && !game->anim_player[i])
+			return (clean(game), exit(1), 0);
+		if (!game->anim_coin[i])
+			return (clean(game), exit(1), 0);
+		i++;
+	}
 	if (!game->floor || !game->wall || !game->coin || !game->enemy
 		|| !game->exit)
-		return (clean(game), 0);
+		return (clean(game), exit(1), 0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:55:41 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 10:43:53 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:22:55 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		draw_map(t_game *game, int i, int j);
 void		make_map(t_game *game);
 void		move_player(t_game *game, int x_move, int y_move);
 int			pressed(int key_code, t_game *game);
-int			check(char **map);
+int			check(char **map, t_game *game);
 void		to_fill(t_game *game, char **map, int y, int x);
 int			ft_check(t_game *game);
 

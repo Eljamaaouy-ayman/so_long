@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:55:41 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/02/23 11:35:35 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:26:36 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ char		*ft_itoa(int n);
 void		free_arr2(char **p, int rows);
 void		clean(t_game *game);
 void		free_arr(char **p, int rows);
-int	close_win(t_game *game);
-void	clean_animation(t_game *game);
-char	*ft_strdup2(const char *s1);
-int	move(t_game *game, int x, int y);
+int			close_win(t_game *game);
+void		clean_animation(t_game *game);
+char		*ft_strdup2(const char *s1);
+int			move(t_game *game, int x, int y);
+void		norm(t_game *game, int i, int x, int y);
+void		put_img(t_game *game, void *some, int i, int j);
+void		keys(t_game *game, int key_code);
+int			check(char **map, t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:23:02 by ael-jama          #+#    #+#             */
-/*   Updated: 2025/03/05 17:04:35 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:24:16 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,15 @@ void	draw_map(t_game *game, int i, int j)
 		|| !game->anim_player || !game->exit)
 		return (clean(game), exit(0));
 	if (game->map[i][j] == '0')
-		mlx_put_image_to_window(game->mlx, game->win, game->floor, j * 64, i
-			* 64);
+		put_img(game, game->floor, i, j);
 	else if (game->map[i][j] == 'N')
-		mlx_put_image_to_window(game->mlx, game->win, game->enemy, j * 64, i
-			* 64);
+		put_img(game, game->enemy, i, j);
 	else if (game->map[i][j] == '1')
-		mlx_put_image_to_window(game->mlx, game->win, game->wall, j * 64, i
-			* 64);
+		put_img(game, game->wall, i, j);
 	else if (game->map[i][j] == 'P')
-		mlx_put_image_to_window(game->mlx, game->win, game->anim_player[0], j
-			* 64, i * 64);
+		put_img(game, game->anim_player[0], i, j);
 	else if (game->map[i][j] == 'E')
-		mlx_put_image_to_window(game->mlx, game->win, game->exit, j * 64, i
-			* 64);
+		put_img(game, game->exit, i, j);
 	else if (game->map[i][j] == 'C')
 	{
 		game->xycoin[b] = j * 64;
@@ -72,7 +67,7 @@ void	draw_map(t_game *game, int i, int j)
 
 void	make_map(t_game *game)
 {
-	int(i), (j);
+	int (i), (j);
 	i = 0;
 	while (game->map[i])
 	{
@@ -86,6 +81,19 @@ void	make_map(t_game *game)
 	}
 }
 
+void	norm(t_game *game, int i, int x, int y)
+{
+	while (i < game->total_coin * 2)
+	{
+		if (game->xycoin[i] == y * 64 && game->xycoin[i + 1] == x * 64)
+		{
+			game->xycoin[i] = -1;
+			game->xycoin[i + 1] = -1;
+		}
+		i += 2;
+	}
+}
+
 int	move(t_game *game, int x, int y)
 {
 	int	i;
@@ -96,15 +104,7 @@ int	move(t_game *game, int x, int y)
 	else if (game->map[x][y] == 'C')
 	{
 		game->collectible--;
-		while (i < game->total_coin * 2)
-		{
-			if (game->xycoin[i] == y * 64 && game->xycoin[i + 1] == x * 64)
-			{
-				game->xycoin[i] = -1;
-				game->xycoin[i + 1] = -1;
-			}
-			i += 2;
-		}
+		norm(game, i, x, y);
 	}
 	else if (game->map[x][y] == 'E')
 	{
